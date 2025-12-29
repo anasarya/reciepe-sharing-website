@@ -1,12 +1,10 @@
 {
-  "version": 2,
-  "name": "recipe-sharing-website",
   "builds": [
     {
-      "src": "client/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "client/build"
       }
     }
   ],
