@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "recipe-sharing-website",
   "builds": [
     {
       "src": "client/package.json",
@@ -12,7 +13,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/client/build/$1"
+      "dest": "/client/build/index.html"
     }
   ]
 }
