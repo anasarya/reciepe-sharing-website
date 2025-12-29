@@ -20,7 +20,14 @@ const RecipeDetail = () => {
       setRecipe(response.data);
     } catch (error) {
       console.error('Error fetching recipe:', error);
-      setError('Recipe not found');
+      // Fallback to mock data in production
+      const { mockRecipes } = await import('../config');
+      const foundRecipe = mockRecipes.find(r => r.id === parseInt(id));
+      if (foundRecipe) {
+        setRecipe(foundRecipe);
+      } else {
+        setError('Recipe not found');
+      }
     } finally {
       setLoading(false);
     }

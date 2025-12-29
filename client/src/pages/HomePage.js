@@ -17,6 +17,9 @@ const HomePage = () => {
       setFeaturedRecipes(response.data.slice(0, 3));
     } catch (error) {
       console.error('Error fetching recipes:', error);
+      // Fallback to mock data in production
+      const { mockRecipes } = await import('../config');
+      setFeaturedRecipes(mockRecipes.slice(0, 3));
     }
   };
 

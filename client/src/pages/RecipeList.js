@@ -29,6 +29,26 @@ const RecipeList = () => {
       setRecipes(response.data);
     } catch (error) {
       console.error('Error fetching recipes:', error);
+      // Fallback to mock data in production
+      const { mockRecipes } = await import('../config');
+      let filteredRecipes = mockRecipes;
+      
+      if (filters.category !== 'All') {
+        filteredRecipes = filteredRecipes.filter(recipe => 
+          recipe.category.toLowerCase() === filters.category.toLowerCase()
+        );
+      }
+      
+      if (filters.search) {
+        filteredRecipes = filteredRecipes.filter(recipe =>
+          recipe.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+          recipe.ingredients.some(ingredient => 
+            ingredient.toLowerCase().includes(filters.search.toLowerCase())
+          )
+        );
+      }
+      
+      setRecipes(filteredRecipes);
     } finally {
       setLoading(false);
     }
