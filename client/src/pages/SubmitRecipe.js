@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const SubmitRecipe = ({ user, token }) => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const SubmitRecipe = ({ user, token }) => {
       setLoading(true);
       setError('');
 
-      await axios.post('/api/recipes', formData, {
+      await axios.post(`${config.API_BASE_URL}/api/recipes`, formData, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

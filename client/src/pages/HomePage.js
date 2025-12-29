@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,7 +13,7 @@ const HomePage = () => {
 
   const fetchFeaturedRecipes = async () => {
     try {
-      const response = await axios.get('/api/recipes');
+      const response = await axios.get(`${config.API_BASE_URL}/api/recipes`);
       setFeaturedRecipes(response.data.slice(0, 3));
     } catch (error) {
       console.error('Error fetching recipes:', error);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -24,7 +25,7 @@ const RecipeList = () => {
       if (filters.category !== 'All') params.append('category', filters.category);
       if (filters.search) params.append('search', filters.search);
 
-      const response = await axios.get(`/api/recipes?${params}`);
+      const response = await axios.get(`${config.API_BASE_URL}/api/recipes?${params}`);
       setRecipes(response.data);
     } catch (error) {
       console.error('Error fetching recipes:', error);

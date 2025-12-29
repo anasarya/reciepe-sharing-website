@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import config from '../config';
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const RecipeDetail = () => {
   const fetchRecipe = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/api/recipes/${id}`);
+      const response = await axios.get(`${config.API_BASE_URL}/api/recipes/${id}`);
       setRecipe(response.data);
     } catch (error) {
       console.error('Error fetching recipe:', error);
